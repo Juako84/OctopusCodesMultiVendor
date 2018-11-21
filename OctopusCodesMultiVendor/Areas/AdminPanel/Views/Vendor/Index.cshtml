@@ -1,0 +1,79 @@
+﻿@{
+    ViewBag.Title = "Vendor Management";
+    Layout = "~/Areas/AdminPanel/Views/Shared/_LayoutPage.cshtml";
+}
+
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">@SharedLocalizer["Customers"]</h3>
+                </div>
+                <!-- /.box-header -->
+                @if (TempData["error"] != null)
+                {
+                    <div class="alert alert-danger alert-dismissible">
+                        @TempData["error"]
+                    </div>
+                }
+                <div class="box-body">
+                    <div id="example1_wrapper"
+                         class="dataTables_wrapper form-inline dt-bootstrap">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table id="example1"
+                                       class="table table-bordered table-striped dataTable">
+                                    <thead>
+                                        <tr role="row">
+                                            <th class="no-sort">@SharedLocalizer["Id"]</th>
+                                            <th class="no-sort">@SharedLocalizer["Username"]</th>
+                                            <th class="no-sort">@SharedLocalizer["Name"]</th>
+                                            <th class="no-sort">@SharedLocalizer["Logo"]</th>
+                                            <th class="no-sort">@SharedLocalizer["Address"]</th>
+                                            <th class="no-sort">@SharedLocalizer["Email"]</th>
+                                            <th class="no-sort">@SharedLocalizer["Phone"]</th>
+                                            <th class="no-sort">@SharedLocalizer["MemberShip"]</th>
+                                            <th class="no-sort">@SharedLocalizer["Status"]</th>
+                                            <th class="no-sort">@SharedLocalizer["Actions"]</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var vendor in ViewBag.vendors)
+                                        {
+                                        <tr>
+                                            <td>@vendor.Id</td>
+                                            <td>@vendor.Username</td>
+                                            <td>@vendor.Name</td>
+                                            <td>
+                                                <img src="~/User/Images/@vendor.Logo" width="50" />
+                                            </td>
+                                            <td>@vendor.Address</td>
+                                            <td>@vendor.Email</td>
+                                            <td>@vendor.Phone</td>
+                                            <td>
+                                                <a asp-controller="Account" asp-action="Membership" asp-route-id="@vendor.Id">@SharedLocalizer["Orders_List"]</a>
+                                            </td>
+                                            <td>
+                                                <a asp-controller="Account" asp-action="StatusVendor" asp-route-id="@vendor.Id">@(vendor.Status ? SharedLocalizer["Active"] : SharedLocalizer["InActive"])</a>
+                                            </td>
+                                            <td>
+                                                <a asp-controller="Vendor" asp-action="Edit" asp-route-id="@vendor.Id"><i class="fa fa-edit"></i> @SharedLocalizer["Edit"]</a>
+                                                
+                                            </td>
+                                        </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>

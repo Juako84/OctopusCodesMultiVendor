@@ -1,0 +1,68 @@
+﻿@{
+    ViewBag.Title = "Orders Management";
+    Layout = "~/Areas/AdminPanel/Views/Shared/_LayoutPage.cshtml";
+}
+
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">@SharedLocalizer["Orders"]</h3>
+                </div>
+                <!-- /.box-header -->
+                @if (TempData["error"] != null)
+                {
+                    <div class="alert alert-danger alert-dismissible">
+                        @TempData["error"]
+                    </div>
+                }
+                <div class="box-body">
+                    <div id="example1_wrapper"
+                         class="dataTables_wrapper form-inline dt-bootstrap">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table id="example1"
+                                       class="table table-bordered table-striped dataTable">
+                                    <thead>
+                                        <tr role="row">
+                                            <th class="no-sort">@SharedLocalizer["Id"]</th>
+                                            <th class="no-sort">@SharedLocalizer["Name"]</th>
+                                            <th class="no-sort">@SharedLocalizer["Date_Creation"]</th>
+                                            <th class="no-sort">@SharedLocalizer["Customer_Name"]</th>
+                                            <th class="no-sort">@SharedLocalizer["Vendor_Name"]</th>
+                                            <th class="no-sort">
+                                                @SharedLocalizer["Status"]
+                                            </th>
+                                            <th class="no-sort">
+                                                @SharedLocalizer["Payment"]
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var order in ViewBag.orders)
+                                        {
+                                            <tr>
+                                                <td>@order.Id</td>
+                                                <td>@order.Name</td>
+                                                <td>@order.DateCreation</td>
+                                                <td>@order.Customer.FullName</td>
+                                                <td>@order.Vendor.Name</td>
+                                                <td>@order.OrderStatus.Name</td>
+                                                <td>@(order.Payment != null ? order.Payment.Name : "")</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>

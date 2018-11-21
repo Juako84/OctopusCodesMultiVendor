@@ -1,0 +1,88 @@
+﻿@{
+    ViewBag.Title = "Cart";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<ul class="breadcrumb">
+    <li><a asp-controller="home" asp-action="index">@SharedLocalizer["Home"]</a> <span class="divider">/</span></li>
+    <li class="active"> @SharedLocalizer["PageTitle"]</li>
+</ul>
+
+<h3>@SharedLocalizer["PageTitle"] [ <small>@ViewBag.countItems @(SharedLocalizer["Item"])(s) </small>]<a asp-controller="home" asp-action="index" class="btn btn-large pull-right"><i class="icon-arrow-left"></i> @SharedLocalizer["Continue_Shopping"]</a></h3>
+
+<hr class="soft">
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>@SharedLocalizer["Option"]</th>
+            <th>@SharedLocalizer["Id"]</th>
+            <th>@SharedLocalizer["Name"]</th>
+            <th>@SharedLocalizer["Photo"]</th>
+            <th>@SharedLocalizer["Vendor_Name"]</th>
+            <th>@SharedLocalizer["Quantity"]</th>
+            <th>@SharedLocalizer["Price"]</th>
+            <th>@SharedLocalizer["Total"]</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @if (ViewBag.cart != null)
+        {
+            foreach (var item in ViewBag.cart)
+            {
+                <tr>
+                    <td>
+                        <a asp-controller="cart" asp-action="remove" asp-route-id="@item.Id" class="btn btn-danger"><i class="icon-remove icon-white"></i></a>
+                    </td>
+                    <td>
+                        @item.Id
+                    </td>
+                    <td>
+                        @item.Name
+                    </td>
+                    <td>
+                        <img src="~/User/Images/@item.Photo" width="60" />
+                    </td>
+                    <td>
+                        @item.VendorName
+                    </td>
+                    <td>
+                        <form method="post" asp-controller="cart" asp-action="update">
+                            <div class="input-append">
+                                <input class="span1" style="max-width:50px" placeholder="1" id="appendedInputButtons" size="16" type="number" min="1" value="@item.Quantity" name="quantity">
+                                <button class="btn" type="submit"><i class="icon-save"></i></button>
+                                <input type="hidden" name="productId" value="@item.Id" />
+                            </div>
+                        </form>
+                    </td>
+                    <td>@item.Price.ToString("c")</td>
+                    <td>
+                        @((item.Price * item.Quantity).ToString("c"))
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td colspan="7" style="text-align:right">@SharedLocalizer["Total_Price"]:	</td>
+
+                <td class="label label-important" style="display:block"> <strong> @(ViewBag.total.ToString("c")) </strong></td>
+
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+
+<a asp-controller="home" asp-action="index" class="btn btn-large"><i class="icon-arrow-left"></i> @SharedLocalizer["Continue_Shopping"] </a>
+
+@if (ViewBag.username_customer == null)
+{
+    <a asp-area="customerpanel" asp-controller="Login" asp-action="Index" class="btn btn-large pull-right">@SharedLocalizer["Please_login_before_checkout"] <i class="icon-arrow-right"></i></a>
+}
+else
+{
+    <a asp-controller="Cart" asp-action="Save" class="btn btn-large pull-right">@SharedLocalizer["Send_Your_Orders_to_Vendors"] <i class="icon-save"></i></a>
+
+}
+

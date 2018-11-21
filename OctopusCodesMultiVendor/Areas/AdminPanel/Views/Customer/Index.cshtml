@@ -1,0 +1,81 @@
+﻿@{
+    ViewBag.Title = "Customer Management";
+    Layout = "~/Areas/AdminPanel/Views/Shared/_LayoutPage.cshtml";
+}
+
+
+
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">@SharedLocalizer["Customers"]</h3>
+                </div>
+                <!-- /.box-header -->
+                @if (TempData["error"] != null)
+                {
+                    <div class="alert alert-danger alert-dismissible">
+                        @TempData["error"]
+                    </div>
+                }
+                <div class="box-body">
+                    <div id="example1_wrapper"
+                         class="dataTables_wrapper form-inline dt-bootstrap">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="flexcontent">
+                                    <a asp-controller="Customer" asp-action="AddCustumer">Agregar</a>
+                                    @*<button class="btn btn-secondary buttons-pdf buttons-html5 btn-app export pdf" tabindex="0" aria-controls="ejemplo" type="button" title="PDF"><i class="fa fa-file-pdf-o"></i>PDF</button>
+                                        <button class="btn btn-secondary buttons-excel buttons-html5 btn-app export excel" tabindex="0" aria-controls="ejemplo" type="button" title="Excel"><i class="fa fa-file-excel-o"></i>Excel</button>
+                                        <button class="btn btn-secondary buttons-csv buttons-html5 btn-app export csv" tabindex="0" aria-controls="ejemplo" type="button" title="CSV"><i class="fa fa-file-text-o"></i>CSV</button>
+                                        <button class="btn btn-secondary buttons-print btn-app export imprimir" tabindex="0" aria-controls="ejemplo" type="button" title="Imprimir"><i class="fa fa-print"></i>Imprimir</button>*@
+                                </div>
+                                <table id="example1"
+                                       class="table table-bordered table-striped dataTable">
+
+                                    <thead>
+                                        <tr role="row">
+                                            <th class="no-sort">@SharedLocalizer["NameCustomer"]</th>
+                                            <th class="no-sort">@SharedLocalizer["Code_Customer"]</th>
+                                            <th class="no-sort">@SharedLocalizer["Phone"]</th>
+                                            <th class="no-sort">@SharedLocalizer["Rut"]</th>
+                                            <th class="no-sort">@SharedLocalizer["Date_Creation"]</th>
+                                            <th class="no-sort">@SharedLocalizer["Status"]</th>
+                                            <th class="no-sort">@SharedLocalizer["Actions"]</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var customer in ViewBag.customers)
+                                        {
+                                        <tr>
+                                            <td>@customer.Name</td>
+                                            <td>@customer.Code</td>
+                                            <td>@customer.Phone</td>
+                                            <td>@customer.Status</td>
+                                            <td>@customer.DateCreate</td>
+                                            <td>
+                                                <a asp-controller="Account" asp-action="Status" asp-route-id="@customer.Id">@(customer.Status ? SharedLocalizer["Active"] : SharedLocalizer["InActive"])</a>
+                                            </td>
+                                            <td>
+                                                <a asp-controller="Customer" asp-action="EditCustomer" asp-route-id="@customer.Id">
+                                                    <i class="fa fa-edit"></i>
+                                                    </a>
+                                                    <i class="fa fa-trash"></i>
+                                            </td>
+                                        </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>

@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "Add Category";
+    Layout = "~/Areas/AdminPanel/Views/Shared/_LayoutPage.cshtml";
+}
+
+@model OctopusCodesMultiVendor.Models.ViewModels.CategoryViewModel
+
+<section class="content">
+    <div class="row">
+        <!-- left column -->
+        <div class="col-md-8">
+            <!-- general form elements -->
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">@SharedLocalizer["Add_Category"]</h3>
+                </div>
+                <!-- /.box-header --> <!-- form start -->
+                @if (ViewBag.error != null)
+                {
+                    <div class="alert alert-danger alert-dismissible">
+                        ViewBag.error
+                    </div>
+                }
+
+                <form method="post" asp-controller="Category" asp-action="Add">
+                    <div class="box-body">
+
+                        <div class="form-group">
+                            <label for="name">
+                                @SharedLocalizer["Name"]
+                            </label>
+                            <input type="text"
+                                   asp-for="category.Name"
+                                   class="form-control"
+                                   required="required"
+                                   placeholder="@SharedLocalizer["Name"]" />
+                            <span asp-validation-for="category.Name"></span>
+                        </div>
+
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"
+                                       asp-for="category.Status" /> @SharedLocalizer["Status"]
+                                </label>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="parent">
+                                    @SharedLocalizer["Parent_Category"]
+                                </label>
+                                <select asp-for="category.ParentId"
+                                        asp-items="@(new SelectList(Model.Parent, "Value", "Text"))"
+                                        class="form-control"></select>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer">
+                            <button type="submit" class="btn btn-primary">@SharedLocalizer["Save"]</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.box -->
+            </div>
+            <!--/.col (left) -->
+        </div>
+        <!-- /.row -->
+    </section>

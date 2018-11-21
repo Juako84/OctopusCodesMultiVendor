@@ -1,0 +1,30 @@
+﻿@if (ViewBag.isVendor)
+{
+    <hr class="soft">
+    <h4>@SharedLocalizer["Categories_Vendor"]</h4>
+    <ul id="sideManu" class="nav nav-tabs nav-stacked">
+        @foreach (var category in ViewBag.categories)
+        {
+            var exists = ((IEnumerable<dynamic>)category.InverseParents).Count(c => c.VendorId == ViewBag.vendor.Id) > 0;
+            if (exists)
+            {
+                <li class="subMenu @(TempData["categoryVendorSelected"] != null && Convert.ToInt32(TempData["categoryVendorSelected"]) == category.Id ? "open" : "")">
+                    <a> @category.Name</a>
+                    <ul style="@(TempData["categoryVendorSelected"] != null && Convert.ToInt32(TempData["categoryVendorSelected"]) == category.Id ? "" : "display:none")">
+                        @{
+                            var subCategories = ((IEnumerable<dynamic>)category.InverseParents).Where(c => c.VendorId == ViewBag.vendor.Id && c.Status).ToList();
+                        }
+                        @if (subCategories != null && subCategories.Count > 0)
+                        {
+                            foreach (var subCategory in subCategories)
+                            {
+                                <li><a asp-controller="Vendors" asp-action="Category" asp-route-id="@subCategory.Id" asp-route-vendorId="@subCategory.VendorId"><i class="icon-chevron-right"></i>@subCategory.Name</a></li>
+                            }
+                        }
+
+                    </ul>
+
+                </li>}
+        }
+    </ul>
+}

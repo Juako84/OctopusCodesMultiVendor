@@ -1,0 +1,127 @@
+﻿@{
+    ViewBag.Title = "Vendor Profile";
+    Layout = "~/Areas/VendorPanel/Views/Shared/_LayoutPage.cshtml";
+}
+
+@model OctopusCodesMultiVendor.Models.Vendor
+
+<section class="content">
+    <div class="row">
+        <!-- left column -->
+        <div class="col-md-8">
+            <!-- general form elements -->
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">@SharedLocalizer["Change_Profile"]</h3>
+                </div>
+                <!-- /.box-header --> <!-- form start -->
+                @if (ViewBag.error != null)
+                {
+                    <div class="alert alert-danger alert-dismissible">
+                        ViewBag.error
+                    </div>
+                }
+
+                <form method="post" asp-controller="Login" asp-action="Profile" enctype="multipart/form-data">
+
+                    <div class="box-body">
+
+                        <div class="form-group">
+                            <label for="username">
+                                @SharedLocalizer["Username"]
+                            </label>
+                            <input type="text"
+                                   asp-for="Username"
+                                   class="form-control"
+                                   required="required"
+                                   placeholder="@SharedLocalizer["Username"]" />
+                            <span asp-validation-for="Username"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">
+                                @SharedLocalizer["Password"]
+                            </label>
+                            <input type="password"
+                                   asp-for="Password"
+                                   class="form-control"
+                                   required="required"
+                                   placeholder="@SharedLocalizer["Password"]" />
+                            <span asp-validation-for="Password"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name">
+                                @SharedLocalizer["Name"]
+                            </label>
+                            <input type="text"
+                                   asp-for="Name"
+                                   class="form-control"
+                                   required="required"
+                                   placeholder="@SharedLocalizer["Name"]" />
+                            <span asp-validation-for="Name"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="address">
+                                @SharedLocalizer["Address"]
+                            </label>
+                            <input type="text"
+                                   asp-for="Address"
+                                   class="form-control"
+                                   required="required"
+                                   placeholder="@SharedLocalizer["Address"]" />
+                            <span asp-validation-for="Address"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">
+                                @SharedLocalizer["Email"]
+                            </label>
+                            <input type="email"
+                                   asp-for="Email"
+                                   class="form-control"
+                                   required="required"
+                                   placeholder="@SharedLocalizer["Email"]" />
+                            <span asp-validation-for="Email"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">
+                                @SharedLocalizer["Phone"]
+                            </label>
+                            <input type="text"
+                                   asp-for="Phone"
+                                   class="form-control"
+                                   placeholder="@SharedLocalizer["Phone"]" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="logo">
+                                @SharedLocalizer["Logo"]
+                            </label>
+                            <input type="file" name="logo" accept="image/*" />
+                            @if (ViewBag.errorPhoto != null)
+                            {
+                                <br />
+                                <span style="color: red">@ViewBag.errorPhoto</span>
+                            }
+                            <br />
+                            <img src="~/User/Images/@Model.Logo" width="120" />
+                        </div>
+
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-primary">@SharedLocalizer["Save"]</button>
+                    </div>
+                    <input type="hidden" asp-for="Id" />
+                    <input type="hidden" asp-for="Logo" />
+                </form>
+            </div>
+            <!-- /.box -->
+        </div>
+        <!--/.col (left) -->
+    </div>
+    <!-- /.row -->
+</section>

@@ -1,0 +1,80 @@
+﻿@{
+    ViewBag.Title = "Product Management";
+    Layout = "~/Areas/VendorPanel/Views/Shared/_LayoutPage.cshtml";
+}
+
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">@SharedLocalizer["Products"]</h3>
+                </div>
+                <!-- /.box-header -->
+                @if (TempData["error"] != null)
+                {
+                    <div class="alert alert-danger alert-dismissible">
+                        @TempData["error"]
+                    </div>
+                }
+                <div class="box-body">
+                    <div id="example1_wrapper"
+                         class="dataTables_wrapper form-inline dt-bootstrap">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table id="example1"
+                                       class="table table-bordered table-striped dataTable">
+                                    <thead>
+                                        <tr role="row">
+                                            <th class="no-sort">@SharedLocalizer["Id"]</th>
+                                            <th class="no-sort">@SharedLocalizer["Name"]</th>
+                                            <th class="no-sort">@SharedLocalizer["Photo"]</th>
+                                            <th class="no-sort">@SharedLocalizer["Price"]</th>
+                                            <th class="no-sort">@SharedLocalizer["Category"]</th>
+                                            <th class="no-sort">@SharedLocalizer["Vendor_Name"]</th>
+                                            <th class="no-sort">@SharedLocalizer["Status"]</th>
+                                            <th class="no-sort">@SharedLocalizer["Actions"]</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var product in ViewBag.products)
+                                        {
+                                            Product pr = (Product)product;
+                                            Photo mainPhoto = pr.Photos.SingleOrDefault(p => p.Main == true);
+                                            <tr>
+                                                <td>@product.Id</td>
+                                                <td>@product.Name</td>
+                                                <td><img src="~/User/Images/@(mainPhoto != null ? mainPhoto.Name : "no-image.png")" width="120" /></td>
+                                                <td>@product.Price.ToString("c")</td>
+                                                <td>@product.Category.Parent.Name -> @product.Category.Name</td>
+                                                <td>@product.Vendor.Name</td>
+                                                <td>
+                                                    <a asp-controller="Product" asp-action="Status" asp-route-id="@product.Id">@(product.Status ? SharedLocalizer["Show"] : SharedLocalizer["Hide"])</a>
+                                                </td>
+                                                <td>
+                                                    <a asp-controller="Product" asp-action="Edit" asp-route-id="@product.Id">@SharedLocalizer["Edit"]</a>
+                                                    @if (product.OrdersDetails == null || product.OrdersDetails.Count == 0)
+                                                    {
+                                                        <span>|</span> <a asp-controller="Product" asp-action="Delete" asp-route-id="@product.Id" onclick="return confirm('@SharedLocalizer["Are_you_sure"]')">@SharedLocalizer["Delete"]</a>
+                                                    }
+                                                    |
+                                                    <a asp-controller="Product" asp-action="Photos" asp-route-id="@product.Id">@SharedLocalizer["Photos"]</a>
+                                                    |
+                                                    <a asp-controller="Product" asp-action="AddPhoto" asp-route-id="@product.Id">@SharedLocalizer["Add_Photo"]</a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>

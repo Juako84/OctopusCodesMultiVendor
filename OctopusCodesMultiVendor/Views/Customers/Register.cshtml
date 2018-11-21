@@ -1,0 +1,92 @@
+﻿@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+@model OctopusCodesMultiVendor.Models.AccountCustomer
+
+<ul class="breadcrumb">
+    <li><a asp-controller="home" asp-action="index">@SharedLocalizer["Home"]</a> <span class="divider">/</span></li>
+    <li class="active">@SharedLocalizer["Customer_Register"]</li>
+</ul>
+
+<h3>@SharedLocalizer["Customer_Information"]</h3>
+
+<hr class="soft">
+
+<form method="post" asp-controller="customers" asp-action="register">
+    <fieldset>
+        @TempData["message"]
+        @*<div class="control-group">
+            <label class="control-label" for="textarea">@(SharedLocalizer["Username"])*</label>
+            <div class="controls">
+                <input type="text" asp-for="Username" class="input-xxlarge" required="required" placeholder="@SharedLocalizer["Username"]"   />
+                <br />
+                <span asp-validation-for="Username"></span>
+            </div>
+        </div>*@
+
+        <div class="control-group">
+            <label class="control-label" for="password">@(SharedLocalizer["Password"])*</label>
+            <div class="controls">
+                <input type="password" asp-for="Password" class="input-xxlarge" required="required" placeholder="@SharedLocalizer["Password_validate_message"]" title="@SharedLocalizer["Password_validate_message"]" />
+                <br />
+                <span asp-validation-for="Password"></span>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="textarea">@SharedLocalizer["Full_Name"])*</label>
+            <div class="controls">
+                <input type="text"
+                       asp-for="FullName"
+                       class="input-xxlarge"
+                       required="required"
+                       placeholder="@SharedLocalizer["Full_Name"]" />
+                <br />
+                <span asp-validation-for="FullName"></span>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="textarea">@(SharedLocalizer["Address"])*</label>
+            <div class="controls">
+                <input type="text"
+                       asp-for="Address"
+                       class="input-xxlarge"
+                       required="required"
+                       placeholder="@SharedLocalizer["Address"]" />
+                <br />
+                <span asp-validation-for="Address"></span>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="textarea">@(SharedLocalizer["Email"])*</label>
+            <div class="controls">
+                <input type="email"
+                       asp-for="Email"
+                       class="input-xxlarge"
+                       required="required"
+                       placeholder="@SharedLocalizer["Email"]" />
+                <br />
+                <span asp-validation-for="Email"></span>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="textarea">@SharedLocalizer["Phone"]</label>
+            <div class="controls">
+                <input type="phone"
+                       asp-for="Phone"
+                       class="input-xxlarge"
+                       required="required"
+                       placeholder="@SharedLocalizer["Phone"]" />
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">@SharedLocalizer["Save"]</button>
+
+    </fieldset>
+</form>
+

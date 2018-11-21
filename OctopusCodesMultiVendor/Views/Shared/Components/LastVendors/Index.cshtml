@@ -1,0 +1,16 @@
+﻿@if (ViewBag.lastVendors != null)
+{
+    <h4>@SharedLocalizer["Latest_Vendors"]</h4>
+    foreach (var vendor in ((IEnumerable<dynamic>)ViewBag.lastVendors).OrderByDescending(v => v.Id).Take(5))
+    {
+        <div class="thumbnail">
+            <img src="~/User/Images/@vendor.Logo" />
+            <div class="caption">
+                <h5>@vendor.Name</h5>
+                <h4 style="text-align:center">
+                    <a class="btn btn-primary" asp-controller="Vendors" asp-action="Detail" asp-route-id="@vendor.Id">@SharedLocalizer["Products_List"] </a>
+                </h4>
+            </div>
+        </div>
+    }
+}

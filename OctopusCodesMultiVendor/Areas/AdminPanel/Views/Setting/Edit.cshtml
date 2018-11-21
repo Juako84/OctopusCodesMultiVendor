@@ -1,0 +1,87 @@
+﻿@{
+    ViewBag.Title = "Edit Setting";
+    Layout = "~/Areas/AdminPanel/Views/Shared/_LayoutPage.cshtml";
+}
+
+@model OctopusCodesMultiVendor.Models.Setting
+
+<section class="content">
+    <div class="row">
+        <!-- left column -->
+        <div class="col-md-8">
+            <!-- general form elements -->
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">@SharedLocalizer["Edit_Setting"]</h3>
+                </div>
+                <!-- /.box-header --> <!-- form start -->
+                @if (ViewBag.error != null)
+                {
+                    <div class="alert alert-danger alert-dismissible">
+                        ViewBag.error
+                    </div>
+                }
+
+                <form method="post" asp-controller="Setting" asp-action="Edit" enctype="multipart/form-data">
+
+                    <div class="box-body">
+
+                        <div class="form-group">
+                            <label for="value">
+                                @SharedLocalizer["Key"]
+                            </label>
+                            <br />
+                            @Model.Key
+                        </div>
+
+                        @if (Model.TypeOfControl.Equals("textbox"))
+                        {
+                            <div class="form-group">
+                                <label for="value">
+                                    @SharedLocalizer["Value"]
+                                </label>
+                                <input type="text" asp-for="Value" class="form-control" required="required" placeholder="@SharedLocalizer["Value"]" />
+                                <span asp-validation-for="Value"></span>
+                            </div>
+                        }
+                        else if (Model.TypeOfControl.Equals("textarea"))
+                        {
+                            <div class="form-group">
+                                <label for="value">
+                                    @SharedLocalizer["Value"]
+                                </label>
+                                <input type="file" name="logo" accept="image/*" />
+                            </div>
+                        }
+                        else if (Model.TypeOfControl.Equals("file"))
+                        {
+                            <div class="form-group">
+                                <label for="value">
+                                    @SharedLocalizer["Value"]
+                                </label>
+                                <input type="file" name="logo" accept="image/*" />
+                                <br />
+                                <img src="~/User/Images/@Model.Value" width="200" />
+                                @if (ViewBag.errorPhoto != null)
+                                {
+                                    <br />
+                                    <span style="color: red">@ViewBag.errorPhoto</span>
+                                }
+                            </div>
+                        }
+
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-primary">@SharedLocalizer["Save"]</button>
+                    </div>
+                    <input type="hidden" asp-for="Id" />
+                    <input type="hidden" asp-for="Value" />
+                </form>
+            </div>
+            <!-- /.box -->
+        </div>
+        <!--/.col (left) -->
+    </div>
+    <!-- /.row -->
+</section>

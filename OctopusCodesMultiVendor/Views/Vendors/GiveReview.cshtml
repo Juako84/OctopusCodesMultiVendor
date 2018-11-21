@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "Give Review";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+@model OctopusCodesMultiVendor.Models.Review
+
+<ul class="breadcrumb">
+    <li><a asp-controller="home" asp-action="index">@SharedLocalizer["Home"]</a> <span class="divider">/</span></li>
+    <li class="active">@SharedLocalizer["Give_Review"]</li>
+</ul>
+
+<h3>@SharedLocalizer["Send_Messages_to"] @ViewBag.vendor.Name</h3>
+
+<hr class="soft">
+
+<form method="post" asp-controller="vendors" asp-action="GiveReview">
+    <fieldset>
+        @ViewBag.Result
+        <div class="control-group">
+            <label class="control-label" for="textarea">@SharedLocalizer["Content"]</label>
+            <div class="controls">
+                <textarea asp-for="Detail" class="input-xxlarge" required="required" rows="3"></textarea>
+            </div>
+        </div>
+
+        <input type="hidden" asp-for="VendorId" />
+
+        <button type="submit" class="btn btn-primary">@SharedLocalizer["Send"]</button>
+
+    </fieldset>
+</form>

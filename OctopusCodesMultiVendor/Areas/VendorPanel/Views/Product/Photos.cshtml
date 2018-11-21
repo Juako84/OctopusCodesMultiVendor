@@ -1,0 +1,77 @@
+﻿@{
+    ViewBag.Title = @SharedLocalizer["Photos_of"] + " " + ViewBag.product.Name;
+    Layout = "~/Areas/VendorPanel/Views/Shared/_LayoutPage.cshtml";
+}
+
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">@SharedLocalizer["Photos_of"]  @ViewBag.product.Name</h3>
+                </div>
+
+                @if (TempData["error"] != null)
+                {
+                    <div class="alert alert-danger alert-dismissible">
+                        @TempData["error"]
+                    </div>
+                }
+                <div class="box-body">
+                    <div id="example1_wrapper"
+                         class="dataTables_wrapper form-inline dt-bootstrap">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table id="example1"
+                                       class="table table-bordered table-striped dataTable">
+                                    <thead>
+                                        <tr role="row">
+                                            <th class="no-sort">@SharedLocalizer["Id"]</th>
+                                            <th class="no-sort">@SharedLocalizer["Photo"]</th>
+                                            <th class="no-sort">@SharedLocalizer["Product_Name"]</th>
+                                            <th class="no-sort">@SharedLocalizer["Main_Photo"]</th>
+                                            <th class="no-sort">@SharedLocalizer["Status"]</th>
+                                            <th class="no-sort">@SharedLocalizer["Actions"]</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var photo in ViewBag.product.Photos)
+                                        {
+                                            <tr>
+                                                <td>@photo.Id</td>
+                                                <td><img src="~/User/Images/@photo.Name" width="120" /></td>
+                                                <td>@photo.Product.Name</td>
+                                                <td>
+                                                    @if (photo.Main)
+                                                    {
+                                                        <span>@SharedLocalizer["Main"]</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <a asp-controller="Product" asp-action="MainPhoto" asp-route-id="@photo.Id">@SharedLocalizer["Select_Main"]</a>
+                                                    }
+                                                </td>
+                                                <td>
+                                                    <a asp-controller="Product" asp-action="StatusPhoto" asp-route-id="@photo.Id">@(photo.Status ? SharedLocalizer["Show"] : SharedLocalizer["Hide"])</a>
+                                                </td>
+                                                <td>
+                                                    <a asp-controller="Product" asp-action="EditPhoto" asp-route-id="@photo.Id">@SharedLocalizer["Edit"]</a>
+                                                    |
+                                                    <a asp-controller="Product" asp-action="DeletePhoto" asp-route-id="@photo.Id" onclick="return confirm('@SharedLocalizer["Are_you_sure"]')">@SharedLocalizer["Delete"]</a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>

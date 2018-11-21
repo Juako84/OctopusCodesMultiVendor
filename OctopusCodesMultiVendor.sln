@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2005
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OctopusCodesMultiVendor", "OctopusCodesMultiVendor\OctopusCodesMultiVendor.csproj", "{7AC353CC-F40E-46B4-B8E6-2C3A57B9D1F9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7AC353CC-F40E-46B4-B8E6-2C3A57B9D1F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AC353CC-F40E-46B4-B8E6-2C3A57B9D1F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AC353CC-F40E-46B4-B8E6-2C3A57B9D1F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AC353CC-F40E-46B4-B8E6-2C3A57B9D1F9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BF0D0406-E84C-4F14-9CB1-B79CE3B49A89}
+	EndGlobalSection
+EndGlobal

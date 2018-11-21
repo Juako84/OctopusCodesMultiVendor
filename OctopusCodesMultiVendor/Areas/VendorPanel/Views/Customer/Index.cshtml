@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "Customers of Vendor";
+    Layout = "~/Areas/VendorPanel/Views/Shared/_LayoutPage.cshtml";
+}
+
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">@SharedLocalizer["Customers"]</h3>
+                </div>
+                <!-- /.box-header -->
+                @if (TempData["error"] != null)
+                {
+                    <div class="alert alert-danger alert-dismissible">
+                        @TempData["error"]
+                    </div>
+                }
+                <div class="box-body">
+                    <div id="example1_wrapper"
+                         class="dataTables_wrapper form-inline dt-bootstrap">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table id="example1"
+                                       class="table table-bordered table-striped dataTable">
+                                    <thead>
+                                        <tr role="row">
+                                            <th class="no-sort">@SharedLocalizer["Id"]</th>
+                                            <th class="no-sort">@SharedLocalizer["Username"]</th>
+                                            <th>@SharedLocalizer["Full_Name"]</th>
+                                            <th>@SharedLocalizer["Address"]</th>
+                                            <th>@SharedLocalizer["Email"]</th>
+                                            <th>@SharedLocalizer["Phone"]</th>
+                                            <th>@SharedLocalizer["Actions"]</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var customer in ViewBag.customers)
+                                        {
+                                            <tr>
+                                                <td>@customer.Id</td>
+                                                <td>@customer.Username</td>
+                                                <td>@customer.FullName</td>
+                                                <td>@customer.Address</td>
+                                                <td>@customer.Email</td>
+                                                <td>@customer.Phone</td>
+                                                <td>
+                                                    <a asp-controller="Orders" asp-action="Customer" asp-route-id="@customer.Id">@SharedLocalizer["Orders_List"]</a> | <a asp-controller="Review" asp-action="Customer" asp-route-id="@customer.Id">@SharedLocalizer["Reviews List"]</a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>

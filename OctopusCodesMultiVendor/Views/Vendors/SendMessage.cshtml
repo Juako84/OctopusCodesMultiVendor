@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "Send Message";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+@model OctopusCodesMultiVendor.Models.Message
+
+<ul class="breadcrumb">
+    <li><a asp-controller="home" asp-action="index">@SharedLocalizer["Home"]</a> <span class="divider">/</span></li>
+    <li class="active">@SharedLocalizer["Send_Messages"]</li>
+</ul>
+
+<h3>
+    @SharedLocalizer["Send_Messages_to"] @ViewBag.vendor.Name
+</h3>
+
+<hr class="soft">
+
+<form method="post" asp-controller="vendors" asp-action="SendMessage" class="form-inline">
+    <fieldset>
+        @ViewBag.Result
+        <div class="control-group">
+            <label class="control-label" for="input_1">@SharedLocalizer["Title"]</label>
+            <div class="controls">
+                <input type="text" asp-for="Title" class="input-xxlarge" required="required" />
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="textarea">@SharedLocalizer["Content"]</label>
+            <div class="controls">
+                <textarea asp-for="Body" class="input-xxlarge" required="required" rows="3"></textarea>
+            </div>
+        </div>
+
+        <input type="hidden" asp-for="VendorId" />
+
+        <button type="submit" class="btn btn-primary">@SharedLocalizer["Send"]</button>
+
+    </fieldset>
+</form>

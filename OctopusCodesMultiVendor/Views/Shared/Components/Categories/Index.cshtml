@@ -1,0 +1,23 @@
+﻿<h4>@SharedLocalizer["Categories"]</h4>
+<ul id="sideManu" class="nav nav-tabs nav-stacked">
+    @foreach (var category in ViewBag.categories)
+    {
+        <li class="subMenu @(TempData["categorySelected"] != null && Convert.ToInt32(TempData["categorySelected"]) == category.Id ? "open" : "")">
+            <a>@category.Name</a>
+            <ul style="@(TempData["categorySelected"] != null && Convert.ToInt32(TempData["categorySelected"]) == category.Id ? "" : "display:none")">
+                @{
+                    var subCategories = ((IEnumerable<dynamic>)category.InverseParents).Where(c => c.VendorId == null && c.Status).ToList();
+                }
+                @if (subCategories != null && subCategories.Count > 0)
+                {
+                    foreach (var subCategory in subCategories)
+                    {
+                        <li><a asp-controller="Product" asp-action="Category" asp-route-id="@subCategory.Id"><i class="icon-chevron-right"></i>@subCategory.Name</a></li>
+                    }
+                }
+
+            </ul>
+
+        </li>
+    }
+</ul>

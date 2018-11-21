@@ -1,0 +1,18 @@
+﻿<form class="form-inline navbar-search" method="get" asp-controller="Product" asp-action="Search">
+    <input id="keyword" name="keyword" class="srchTxt" type="text" value="@ViewBag.keyword" />
+    <select class="srchTxt" name="category">
+        @foreach (var category in ViewBag.categories)
+        {
+            <optgroup label="@category.Name"></optgroup>
+            var subCategories = ((IEnumerable<dynamic>)category.InverseParents).Where(c => c.VendorId == null && c.Status).ToList();
+            if (subCategories != null && subCategories.Count > 0)
+            {
+                foreach (var subCategory in subCategories)
+                {
+                    <option value="@subCategory.Id">@subCategory.Name</option>
+                }
+            }
+        }
+    </select>
+    <button type="submit" id="submitButton" class="btn btn-primary">@SharedLocalizer["Go"]</button>
+</form>

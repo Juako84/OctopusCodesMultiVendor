@@ -1,0 +1,62 @@
+﻿<ul id="topMenu" class="nav">
+    @{
+        if (ViewBag.customer_logged != null)
+        {
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">@SharedLocalizer["Welcome"] @ViewBag.customer_logged.FullName <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a asp-area="customerpanel" asp-controller="Orders" asp-action="Index">@SharedLocalizer["Customer_Panel"]</a></li>
+                    <li><a asp-area="customerpanel" asp-controller="Login" asp-action="Profile">@SharedLocalizer["Profile"]</a></li>
+                    <li><a asp-area="customerpanel" asp-controller="Login" asp-action="SignOut">@SharedLocalizer["Logout"]</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">@SharedLocalizer["Vendor_Register"] <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a asp-area="Vendorpanel" asp-controller="Login" asp-action="Index">@SharedLocalizer["Login"]</a></li>
+                    <li><a asp-controller="Vendors" asp-action="Register">@SharedLocalizer["Register"]</a></li>
+                    <li><a asp-controller="Vendors" asp-action="MemberShip">@SharedLocalizer["MemberShip"]</a></li>
+                </ul>
+            </li>
+        }
+
+        if (ViewBag.vendor_logged != null)
+        {
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">@SharedLocalizer["Customer_Panel"] <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a asp-area="Customerpanel" asp-controller="Login" asp-action="Index">@SharedLocalizer["Login"]</a></li>
+                 @*   <li><a asp-controller="Customers" asp-action="Register">@SharedLocalizer["Register"]</a></li>*@
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">@SharedLocalizer["Welcome"] @ViewBag.vendor_logged.Name <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a asp-area="Vendorpanel" asp-controller="Category" asp-action="Index">@SharedLocalizer["Vendor_Panel"]</a></li>
+                    <li><a asp-controller="Vendors" asp-action="MemberShip">@SharedLocalizer["MemberShip"]</a></li>
+                    <li><a asp-area="Vendorpanel" asp-controller="Login" asp-action="Profile">@SharedLocalizer["Profile"]</a></li>
+                    <li><a asp-area="Vendorpanel" asp-controller="Login" asp-action="SignOut">@SharedLocalizer["Logout"]</a></li>
+                </ul>
+            </li>
+        }
+
+        if (ViewBag.customer_logged == null && ViewBag.vendor_logged == null)
+        {
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">@SharedLocalizer["Customer_Register"] <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a asp-area="customerpanel" asp-controller="Login" asp-action="Index">@SharedLocalizer["Login"]</a></li>
+                    @*<li><a asp-controller="Customers" asp-action="Register">@SharedLocalizer["Register"]</a></li>*@
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">@SharedLocalizer["Vendor_Register"] <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a asp-area="Vendorpanel" asp-controller="Login" asp-action="Index">@SharedLocalizer["Login"]</a></li>
+                    <li><a asp-controller="Vendors" asp-action="Register">@SharedLocalizer["Register"]</a></li>
+                    <li><a asp-controller="Vendors" asp-action="MemberShip">@SharedLocalizer["MemberShip"]</a></li>
+                </ul>
+            </li>
+        }
+    }
+</ul>

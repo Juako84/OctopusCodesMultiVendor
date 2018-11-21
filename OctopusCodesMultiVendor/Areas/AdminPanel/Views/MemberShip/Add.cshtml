@@ -1,0 +1,92 @@
+﻿@{
+    ViewBag.Title = "Add MemberShip";
+    Layout = "~/Areas/AdminPanel/Views/Shared/_LayoutPage.cshtml";
+}
+
+@model OctopusCodesMultiVendor.Models.MemberShip
+
+<section class="content">
+    <div class="row">
+        <!-- left column -->
+        <div class="col-md-8">
+            <!-- general form elements -->
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">@SharedLocalizer["Add_MemberShip"]</h3>
+                </div>
+                <!-- /.box-header --> <!-- form start -->
+                @if (ViewBag.error != null)
+                {
+                    <div class="alert alert-danger alert-dismissible">
+                        ViewBag.error
+                    </div>
+                }
+
+                <form method="post" asp-controller="MemberShip" asp-action="Add">
+                    <div class="box-body">
+
+                        <div class="form-group">
+                            <label for="name">
+                                @SharedLocalizer["Name"]
+                            </label>
+                            <input type="text"
+                                   asp-for="Name"
+                                   class="form-control"
+                                   required="required"
+                                   placeholder="@SharedLocalizer["Name"]" />
+                            <span asp-validation-for="Name"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description">
+                                @SharedLocalizer["Description"]
+                            </label>
+                            <textarea asp-for="Description" class="form-control" placeholder="@SharedLocalizer["Description"]"></textarea>
+                            <span asp-validation-for="Description"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="price">
+                                @SharedLocalizer["Price"]
+                            </label>
+                            <input type="number"
+                                   asp-for="Price"
+                                   class="form-control"
+                                   required="required"
+                                   placeholder="@SharedLocalizer["Price"]"
+                                   min="1" />
+                            <span asp-validation-for="Price"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="month">
+                                @SharedLocalizer["Month"]
+                            </label>
+                            <input type="number"
+                                   asp-for="Month"
+                                   class="form-control"
+                                   required="required"
+                                   placeholder="@SharedLocalizer["Month"]"
+                                   min="1" />
+                            <span asp-validation-for="Month"></span>
+                        </div>
+
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" asp-for="Status" /> @SharedLocalizer["Status"]
+                            </label>
+                        </div>
+
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-primary">@SharedLocalizer["Save"]</button>
+                    </div>
+                </form>
+            </div>
+            <!-- /.box -->
+        </div>
+        <!--/.col (left) -->
+    </div>
+    <!-- /.row -->
+</section>

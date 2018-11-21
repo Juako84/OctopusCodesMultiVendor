@@ -1,0 +1,105 @@
+﻿@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+@model OctopusCodesMultiVendor.Models.Vendor
+
+<ul class="breadcrumb">
+    <li><a asp-controller="home" asp-action="index">@SharedLocalizer["Home"]</a> <span class="divider">/</span></li>
+    <li class="active">@SharedLocalizer["Vendor_Register"]</li>
+</ul>
+
+<h3>@SharedLocalizer["Vendor_Information"]</h3>
+
+<hr class="soft">
+<form method="post" asp-controller="vendors" asp-action="register">
+    <fieldset>
+        @TempData["message"]
+
+        <div class="control-group">
+            <label class="control-label" for="textarea">@(SharedLocalizer["Username"])*</label>
+            <div class="controls">
+                <input type="text"
+                       asp-for="Username"
+                       class="input-xxlarge"
+                       required="required" placeholder="@SharedLocalizer["Username"]" />
+                <br />
+                <span asp-validation-for="Username"></span>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="password">@(SharedLocalizer["Password"])*</label>
+            <div class="controls">
+                <input type="password"
+                       asp-for="Password"
+                       class="input-xxlarge"
+                       required="required" title="@SharedLocalizer["Password_validate_message"]" placeholder="@SharedLocalizer["Password_validate_message"]" />
+                <br />
+                <span asp-validation-for="Password"></span>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="textarea">@(SharedLocalizer["Name"])*</label>
+            <div class="controls">
+                <input type="text"
+                       asp-for="Name"
+                       class="input-xxlarge"
+                       required="required" placeholder="@SharedLocalizer["Name"]" />
+                <br />
+                <span asp-validation-for="Name"></span>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="textarea">@(SharedLocalizer["Address"])*</label>
+            <div class="controls">
+                <input type="text"
+                       asp-for="Address"
+                       class="input-xxlarge"
+                       required="required" placeholder="@SharedLocalizer["Address"]" />
+                <br />
+                <span asp-validation-for="Address"></span>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="textarea">@(SharedLocalizer["Email"])*</label>
+            <div class="controls">
+                <input type="email"
+                       asp-for="Email"
+                       class="input-xxlarge"
+                       required="required" placeholder="@SharedLocalizer["Email"]" />
+                <br />
+                <span asp-validation-for="Email"></span>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="textarea">@(SharedLocalizer["Phone"])</label>
+            <div class="controls">
+                <input type="text"
+                       asp-for="Phone"
+                       class="input-xxlarge" placeholder="@SharedLocalizer["Phone"]" />
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="textarea">@(SharedLocalizer["Logo"])</label>
+            <div class="controls">
+                <input type="file" name="logo" accept="image/*" />
+                @if (ViewBag.errorPhoto != null)
+                {
+                    <br />
+                    <span style="color: red">@ViewBag.errorPhoto</span>
+                }
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">@(SharedLocalizer["Save"])</button>
+
+    </fieldset>
+</form>
+

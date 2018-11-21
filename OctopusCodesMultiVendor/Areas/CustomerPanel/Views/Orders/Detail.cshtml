@@ -1,0 +1,84 @@
+﻿@{
+    ViewBag.Title = "Order Detail";
+    Layout = "~/Areas/CustomerPanel/Views/Shared/_LayoutPage.cshtml";
+}
+
+<section class="invoice">
+    <!-- title row -->
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="page-header">
+                <i class="fa fa-globe"></i> OctopusCodes, Inc.
+                <small class="pull-right">@SharedLocalizer["Date"]: @ViewBag.order.DateCreation.ToString("MM/dd/yyyy")</small>
+            </h2>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- info row -->
+    <div class="row invoice-info">
+        <div class="col-sm-4 invoice-col">
+            @SharedLocalizer["Customer_Information"]
+            <address>
+                <strong>@ViewBag.order.Customer.FullName</strong><br>
+                @ViewBag.order.Customer.Address<br>
+                @SharedLocalizer["Phone"]: @ViewBag.order.Customer.Phone<br>
+                @SharedLocalizer["Email"]: @ViewBag.order.Customer.Email
+            </address>
+        </div>
+        <!-- /.col -->
+        <!-- /.col -->
+        <div class="col-sm-4 invoice-col">
+            <b>@SharedLocalizer["Order_Info"]</b><br>
+            <b>@SharedLocalizer["Order_ID"]:</b> @ViewBag.order.Id<br>
+            <b>@SharedLocalizer["Payment_Date"]:</b> @ViewBag.order.DateCreation.ToString("MM/dd/yyyy")<br>
+            <b>@SharedLocalizer["Order_Status"]:</b> @ViewBag.order.OrderStatus.Name<br>
+            <b>@SharedLocalizer["Payment"]:</b> @(ViewBag.order.Payment != null ? ViewBag.order.Payment.Name : "")
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+    <!-- Table row -->
+    <div class="row">
+        <div class="col-xs-12 table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>@SharedLocalizer["Id"]</th>
+                        <th>@SharedLocalizer["Name"]</th>
+                        <th>@SharedLocalizer["Photo"]</th>
+                        <th>@SharedLocalizer["Price"]</th>
+                        <th>@SharedLocalizer["Quantity"]</th>
+                        <th>@SharedLocalizer["Sub_Total"]</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        decimal s = 0;
+                    }
+                    @foreach (var orderDetail in ViewBag.order.OrdersDetails)
+                    {
+                        Product pr = (Product)orderDetail.Product;
+                        Photo mainPhoto = pr.Photos.SingleOrDefault(p => p.Main == true);
+                        s += orderDetail.Price * @orderDetail.Quantity;
+                        <tr>
+                            <td>@orderDetail.Product.Id</td>
+                            <td>@orderDetail.Product.Name</td>
+                            <td><img src="~/User/Images/@(mainPhoto != null ? mainPhoto.Name : "no-image.png")" width="80" /></td>
+                            <td>@orderDetail.Price.ToString("c")</td>
+                            <td>@orderDetail.Quantity</td>
+                            <td>@((orderDetail.Price * @orderDetail.Quantity).ToString("c"))</td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="5" align="right">@SharedLocalizer["Total"]</td>
+                        <td>@s.ToString("c")</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <!-- /.col -->
+    </div>
+
+</section>

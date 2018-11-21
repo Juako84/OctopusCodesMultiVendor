@@ -1,0 +1,73 @@
+﻿@{
+    ViewBag.Title = "MemberShip Management";
+    Layout = "~/Areas/AdminPanel/Views/Shared/_LayoutPage.cshtml";
+}
+
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">@SharedLocalizer["MemberShips"]</h3>
+                </div>
+                <!-- /.box-header -->
+                @if (TempData["error"] != null)
+                {
+                    <div class="alert alert-danger alert-dismissible">
+                        @TempData["error"]
+                    </div>
+                }
+                <div class="box-body">
+                    <div id="example1_wrapper"
+                         class="dataTables_wrapper form-inline dt-bootstrap">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table id="example1"
+                                       class="table table-bordered table-striped dataTable">
+                                    <thead>
+                                        <tr role="row">
+                                            <th class="no-sort">@SharedLocalizer["Id"]</th>
+                                            <th class="no-sort">@SharedLocalizer["Name"]</th>
+                                            <th class="no-sort">@SharedLocalizer["Price"]</th>
+                                            <th class="no-sort">@SharedLocalizer["Month"]</th>
+                                            <th class="no-sort">@SharedLocalizer["Description"]</th>
+                                            <th class="no-sort">@SharedLocalizer["Status"]</th>
+                                            <th class="no-sort">@SharedLocalizer["Actions"]</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var membership in ViewBag.memberships)
+                                        {
+                                            <tr>
+                                                <td>@membership.Id</td>
+                                                <td>@membership.Name</td>
+                                                <td>@membership.Price.ToString("c")</td>
+                                                <td>@membership.Month</td>
+                                                <td>@Html.Raw(membership.Description)</td>
+                                                <td>
+                                                    <a asp-controller="MemberShip" asp-action="Status" asp-route-id="@membership.Id">@(membership.Status ? SharedLocalizer["Show"] : SharedLocalizer["Hide"])</a>
+                                                </td>
+
+                                                <td>
+                                                    <a asp-controller="MemberShip" asp-action="Edit" asp-route-id="@membership.Id">@SharedLocalizer["Edit"]</a>
+                                                    @if (membership.MemberShipVendors == null || membership.MemberShipVendors.Count == 0 && membership.Id != MemberShipHelper.TrialPackage)
+                                                    {
+                                                        <span>|</span> <a asp-controller="MemberShip" asp-action="Delete" asp-route-id="@membership.Id" onclick="return confirm('@SharedLocalizer["Are_you_sure"]')">@SharedLocalizer["Delete"]</a>
+                                                    }
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
