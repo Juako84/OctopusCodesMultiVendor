@@ -16,9 +16,9 @@
                 <!-- /.box-header --> <!-- form start -->
                 @if (ViewBag.error != null)
                 {
-                <div class="alert alert-danger alert-dismissible">
-                    ViewBag.error
-                </div>
+                    <div class="alert alert-danger alert-dismissible">
+                        ViewBag.error
+                    </div>
                 }
                 <div class="box-body">
                     <form method="post" asp-controller="Customer" asp-action="EditCustomer">
@@ -28,97 +28,103 @@
                             <div class="control-group">
                                 <label class="control-label" for="textarea">@(SharedLocalizer["Status"])*</label>
                                 <div class="controls">
-                                    <input type="checkbox" checked data-toggle="toggle">
-                                    </div>
+                                    <input type="checkbox" data-toggle="toggle" asp-for="Status">
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label" for="textarea">@(SharedLocalizer["NameCustomer"])*</label>
+                                <div class="controls">
+                                    <input type="text"
+                                           asp-for="Name"
+                                           class="input-xxlarge form-control "
+                                           required="required"
+                                           placeholder="@SharedLocalizer["NameCustomer"]" />
+                                    <br />
+                                    <span asp-validation-for="Name"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-inline">
+                                <label class="control-label" for="textarea">@(SharedLocalizer["Rut"])*</label>
+                                <div class="control-group mb-3">
+
+
+                                    <input type="number"
+                                           asp-for="Rut"
+                                           class="input-xxlarge form-control"
+                                           required="required"
+                                           placeholder="@SharedLocalizer["Rut"]" />
+                                    <input type="text"
+                                           asp-for="RutDv"
+                                           class="input-xxlarge form-control"
+                                           required="required"
+                                           placeholder="@SharedLocalizer["RutDv"]" />
+                                    <span asp-validation-for="Rut"></span>
+                                    <br />
+
                                 </div>
 
-                                <div class="control-group">
-                                    <label class="control-label" for="textarea">@(SharedLocalizer["NameCustomer"])*</label>
-                                    <div class="controls">
-                                        <input type="text"
-                                               asp-for="Name"
-                                               class="input-xxlarge form-control "
-                                               required="required"
-                                               placeholder="@SharedLocalizer["NameCustomer"]" />
-                                        <br />
-                                        <span asp-validation-for="Name"></span>
-                                    </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="textarea">@(SharedLocalizer["Phone"])*</label>
+                                <div class="controls">
+                                    <input type="text"
+                                           asp-for="Phone"
+                                           class="input-xxlarge form-control"
+                                           required="required"
+                                           placeholder="@SharedLocalizer["Phone"]" />
+                                    <br />
+                                    <span asp-validation-for="Phone"></span>
                                 </div>
-
-                                <div class="form-inline">
-                                    <label class="control-label" for="textarea">@(SharedLocalizer["Rut"])*</label>
-                                    <div class="control-group mb-3">
-
-
-                                        <input type="number"
-                                               asp-for="Rut"
-                                               class="input-xxlarge form-control"
-                                               required="required"
-                                               placeholder="@SharedLocalizer["Rut"]" />
-                                        <input type="text"
-                                               asp-for="RutDv"
-                                               class="input-xxlarge form-control"
-                                               required="required"
-                                               placeholder="@SharedLocalizer["RutDv"]" />
-                                        <span asp-validation-for="Rut"></span>
-                                        <br />
-
-                                    </div>
-
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="textarea">@(SharedLocalizer["Address"])*</label>
+                                <div class="controls">
+                                    <input type="text"
+                                           asp-for="Address"
+                                           class="input-xxlarge form-control"
+                                           required="required"
+                                           placeholder="@SharedLocalizer["Address"]" />
+                                    <br />
+                                    <span asp-validation-for="Address"></span>
                                 </div>
-                                <div class="control-group">
-                                    <label class="control-label" for="textarea">@(SharedLocalizer["Phone"])*</label>
-                                    <div class="controls">
-                                        <input type="text"
-                                               asp-for="Phone"
-                                               class="input-xxlarge form-control"
-                                               required="required"
-                                               placeholder="@SharedLocalizer["Phone"]" />
-                                        <br />
-                                        <span asp-validation-for="Phone"></span>
-                                    </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label" for="textarea">@(SharedLocalizer["Code"])*</label>
+                                <div class="controls">
+                                    <input type="text"
+                                           asp-for="Code"
+                                           class="input-xxlarge form-control"
+                                           required="required"
+                                           placeholder="@SharedLocalizer["Code"]" />
+                                    <br />
+                                    <span asp-validation-for="Code"></span>
                                 </div>
-                                <div class="control-group">
-                                    <label class="control-label" for="textarea">@(SharedLocalizer["Address"])*</label>
-                                    <div class="controls">
-                                        <input type="text"
-                                               asp-for="Address"
-                                               class="input-xxlarge form-control"
-                                               required="required"
-                                               placeholder="@SharedLocalizer["Address"]" />
-                                        <br />
-                                        <span asp-validation-for="Address"></span>
-                                    </div>
-                                </div>
-
-                                <div class="control-group">
-                                    <label class="control-label" for="textarea">@(SharedLocalizer["Code"])*</label>
-                                    <div class="controls">
-                                        <input type="text"
-                                               asp-for="Code"
-                                               class="input-xxlarge form-control"
-                                               required="required"
-                                               placeholder="@SharedLocalizer["Code"]" />
-                                        <br />
-                                        <span asp-validation-for="Code"></span>
-                                    </div>
-                                </div>
+                            </div>
 
 
-                                <input type="hidden" asp-for="Id" />
+                            <input type="hidden" asp-for="Id" />
 
-                                <br />
-                                <button type="submit" class="btn btn-primary ">@SharedLocalizer["Save"]</button>
+                            <br />
+                            <button type="submit" class="btn btn-primary ">@SharedLocalizer["Save"]</button>
 
-</fieldset>
+                        </fieldset>
                     </form>
                 </div>
 
             </div>
             <!-- /.box -->
         </div>
+
+
         <!--/.col (left) -->
     </div>
     <!-- /.row -->
+
+    @await Component.InvokeAsync("RelateCustomerVendor", new { customerId = Model.Id })
+
 </section>
+
 

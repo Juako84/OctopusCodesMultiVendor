@@ -15,6 +15,7 @@ namespace OctopusCodesMultiVendor.Models
             Products = new HashSet<Product>();
             Reviews = new HashSet<Review>();
             AccountVendors = new HashSet<AccountVendor>();
+            CustomerVendors = new HashSet<CustomerVendor>();
         }
 
         public int Id { get; set; }
@@ -34,5 +35,7 @@ namespace OctopusCodesMultiVendor.Models
         public virtual ICollection<Product> Products { get; set; }
         public virtual ICollection<Review> Reviews { get; set; }
         public virtual ICollection<AccountVendor> AccountVendors { get; set; }
+
+        public virtual ICollection<CustomerVendor> CustomerVendors { get; set; }
     }
 }

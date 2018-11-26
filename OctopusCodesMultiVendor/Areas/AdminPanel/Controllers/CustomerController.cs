@@ -89,7 +89,7 @@ namespace OctopusCodesMultiVendor.Areas.AdminPanel.Controllers
         }
 
         #region Edit
-        [Route("editCustomer")]
+        [Route("editCustomer/{id}")]
         public IActionResult EditCustomer(int? id)
         {
             try
@@ -112,7 +112,7 @@ namespace OctopusCodesMultiVendor.Areas.AdminPanel.Controllers
             }
         }
 
-        [Route("editCustomer")]
+        [Route("editCustomer/{id}")]
         [HttpPost]
         public IActionResult EditCustomer(Customer custommer)
         {
@@ -155,6 +155,65 @@ namespace OctopusCodesMultiVendor.Areas.AdminPanel.Controllers
                 throw;
             }
         }
-        #endregion 
+
+        [Route("statuscustomer/{id}")]
+        public IActionResult StatusCustomer(int id)
+        {
+            try
+            {
+                var customer = ocmde.Customer.SingleOrDefault(a => a.Id == id);
+                customer.Status = !customer.Status;
+                ocmde.SaveChanges();
+                return RedirectToAction("Index", "Customer");
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
+
+        [Route("RelateCustomerVendor/{id}")]
+        [HttpPost]
+        public JsonResult RelateCustomerVendor([FromBody] dynamic id)
+        {
+            try
+            {
+                int idCustomer = Convert.ToInt32(id.idCustomer.Value);
+                int idVendor = Convert.ToInt32(id.idVendor.Value);
+               
+                var customerVendor = ocmde.CustomerVendor.SingleOrDefault(cv => cv.CustomerId.Equals(idCustomer) && cv.VendorId.Equals(idVendor));
+                if (customerVendor != null)
+                {
+                    //Delete relationship
+                    ocmde.CustomerVendor.Remove(customerVendor);
+
+
+                }
+                else
+                {
+                    customerVendor = new CustomerVendor()
+                    {
+                        CustomerId = idCustomer,
+                        VendorId = idVendor,
+                        DateCreate = DateTime.Now
+
+                    };
+                    ocmde.CustomerVendor.Add(customerVendor);
+                }
+
+                ocmde.SaveChanges();
+                return Json(new { success =true });
+                // return RedirectToAction("EditCustomer", "Customer", new { id = idCustomer});
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
+        #endregion
+
+        #region Delete
+
+        #endregion
     }
 }

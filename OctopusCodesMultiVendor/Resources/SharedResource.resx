@@ -136,7 +136,7 @@
     <value>Categories Vendor</value>
   </data>
   <data name="Continue_Shopping" xml:space="preserve">
-    <value>Continue Shopping</value>
+    <value>Continue comprando</value>
   </data>
   <data name="Copyright" xml:space="preserve">
     <value>Copyright © 2017 OctopusCodes. All rights reserved.</value>
@@ -166,10 +166,10 @@
     <value>Id</value>
   </data>
   <data name="INFORMATION" xml:space="preserve">
-    <value>INFORMATION</value>
+    <value>INFORMACIÓN</value>
   </data>
   <data name="Invalid_Account" xml:space="preserve">
-    <value>Invalid Account</value>
+    <value>Cuenta Inválida</value>
   </data>
   <data name="Item" xml:space="preserve">
     <value>Item</value>
@@ -190,7 +190,7 @@
     <value>Login</value>
   </data>
   <data name="Logout" xml:space="preserve">
-    <value>Logout</value>
+    <value>Cerrar Sesión</value>
   </data>
   <data name="MemberShip" xml:space="preserve">
     <value>MemberShip</value>
@@ -307,7 +307,7 @@
     <value>Category</value>
   </data>
   <data name="Content" xml:space="preserve">
-    <value>Content</value>
+    <value>Contenido</value>
   </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
@@ -322,7 +322,7 @@
     <value>Give your review for vendor</value>
   </data>
   <data name="Invalid_Password" xml:space="preserve">
-    <value>Invalid Password</value>
+    <value>Contraseña Inválida</value>
   </data>
   <data name="Logo" xml:space="preserve">
     <value>Logo</value>
@@ -427,7 +427,7 @@
     <value>Change Profile</value>
   </data>
   <data name="Created_By" xml:space="preserve">
-    <value>Created By</value>
+    <value>Creado por</value>
   </data>
   <data name="Customers" xml:space="preserve">
     <value>Clientes</value>
@@ -442,10 +442,10 @@
     <value>Eliminar</value>
   </data>
   <data name="Edit" xml:space="preserve">
-    <value>Edit</value>
+    <value>Editar</value>
   </data>
   <data name="Edit_Category" xml:space="preserve">
-    <value>Edit Category</value>
+    <value>Editar Categoria</value>
   </data>
   <data name="Front_Site" xml:space="preserve">
     <value>Front Site</value>
@@ -454,7 +454,7 @@
     <value>Hide</value>
   </data>
   <data name="List" xml:space="preserve">
-    <value>List</value>
+    <value>Lista</value>
   </data>
   <data name="Messages" xml:space="preserve">
     <value>Messages</value>
@@ -529,16 +529,16 @@
     <value>Edit Photo of</value>
   </data>
   <data name="Edit_Product" xml:space="preserve">
-    <value>Edit Product</value>
+    <value>Editar Producto</value>
   </data>
   <data name="End_Date" xml:space="preserve">
     <value>Fecha fin</value>
   </data>
   <data name="Main" xml:space="preserve">
-    <value>Main</value>
+    <value>Principal</value>
   </data>
   <data name="Main_Photo" xml:space="preserve">
-    <value>Main Photo</value>
+    <value>Foto Principal</value>
   </data>
   <data name="Photos" xml:space="preserve">
     <value>Fotos</value>
@@ -559,7 +559,7 @@
     <value>Accounts</value>
   </data>
   <data name="Active" xml:space="preserve">
-    <value>Active</value>
+    <value>Activo</value>
   </data>
   <data name="Add_MemberShip" xml:space="preserve">
     <value>Add MemberShip</value>
@@ -583,10 +583,10 @@
     <value>General</value>
   </data>
   <data name="Group" xml:space="preserve">
-    <value>Group</value>
+    <value>Grupo</value>
   </data>
   <data name="InActive" xml:space="preserve">
-    <value>InActive</value>
+    <value>Inactivo</value>
   </data>
   <data name="Key" xml:space="preserve">
     <value>Key</value>
@@ -595,7 +595,7 @@
     <value>MemberShips</value>
   </data>
   <data name="Month" xml:space="preserve">
-    <value>Month</value>
+    <value>Mes</value>
   </data>
   <data name="Package_Name" xml:space="preserve">
     <value>Package Name</value>
@@ -644,5 +644,14 @@
   </data>
   <data name="Code_Customer" xml:space="preserve">
     <value>Código Cliente</value>
+  </data>
+  <data name="Customer_associate_Vendor" xml:space="preserve">
+    <value>Proveedores habilitados</value>
+  </data>
+  <data name="vendors_associates" xml:space="preserve">
+    <value>Proveedores habilitados</value>
+  </data>
+  <data name="vendors_available" xml:space="preserve">
+    <value>Proveedores disponibles</value>
   </data>
 </root>

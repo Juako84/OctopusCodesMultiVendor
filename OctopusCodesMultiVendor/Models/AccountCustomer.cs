@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OctopusCodesMultiVendor.Models
 {
-    [Table("AccountClient")]
+    [Table("AccountCustomer")]
     public partial class AccountCustomer
     {
         public AccountCustomer()

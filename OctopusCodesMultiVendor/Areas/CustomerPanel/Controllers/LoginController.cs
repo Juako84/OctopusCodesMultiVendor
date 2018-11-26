@@ -33,9 +33,9 @@ namespace OctopusCodesMultiVendor.Areas.CustomerPanel.Controllers
         {
             try
             {
-                string username = fc["email"];
+                string email = fc["email"];
                 string password = fc["password"];
-                var account = login(username, password);
+                var account = login(email, password);
                 if (account == null)
                 {
                     ViewBag.error = sharedLocalizer["Invalid_Account"];
@@ -149,7 +149,7 @@ namespace OctopusCodesMultiVendor.Areas.CustomerPanel.Controllers
                 }
                 return null;
             }
-            catch
+            catch(Exception e)
             {
                 return null;
             }

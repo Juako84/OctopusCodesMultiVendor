@@ -52,10 +52,10 @@
                                             <td>@customer.Name</td>
                                             <td>@customer.Code</td>
                                             <td>@customer.Phone</td>
-                                            <td>@customer.Status</td>
+                                            <td>@customer.Rut-@customer.RutDv</td>
                                             <td>@customer.DateCreate</td>
                                             <td>
-                                                <a asp-controller="Account" asp-action="Status" asp-route-id="@customer.Id">@(customer.Status ? SharedLocalizer["Active"] : SharedLocalizer["InActive"])</a>
+                                                <a asp-controller="Customer" asp-action="StatusCustomer" asp-route-id="@customer.Id">@(customer.Status ? SharedLocalizer["Active"] : SharedLocalizer["InActive"])</a>
                                             </td>
                                             <td>
                                                 <a asp-controller="Customer" asp-action="EditCustomer" asp-route-id="@customer.Id">

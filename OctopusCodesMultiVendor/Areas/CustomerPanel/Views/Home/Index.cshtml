@@ -1,0 +1,80 @@
+﻿@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<h3>@SharedLocalizer["Latest_Products"]</h3>
+
+<ul class="thumbnails">
+    @foreach (var product in ViewBag.latestProducts)
+    {
+        Product pr = (Product)product;
+        Photo mainPhoto = pr.Photos.SingleOrDefault(p => p.Main && p.Status);
+        <li class="span3">
+            <div class="thumbnail">
+                <a asp-controller="product" asp-action="detail" asp-route-id="@product.Id"><img src="~/User/Images/@(mainPhoto != null ? mainPhoto.Name : "no-image.png")" /></a>
+                <div class="caption">
+                    <h5>@product.Name</h5>
+                    <p>
+                        @SharedLocalizer["Sold_By"]: <a asp-controller="vendors" asp-action="detail" asp-route-id="@product.Vendor.Id"><b> @product.Vendor.Name</b></a>
+                    </p>
+                    <h4 style="text-align:center">
+                        <a class="btn" asp-controller="Product" asp-action="detail" asp-route-id="@product.Id"> <i class="icon-zoom-in"></i></a>
+                        <a class="btn" asp-controller="cart" asp-action="buy" asp-route-id="@product.Id">@SharedLocalizer["Add_to"] <i class="icon -shopping-cart"></i></a>
+                        <a class="btn btn-primary" asp-controller="product" asp-action="detail" asp-route-id="@product.Id">@product.Price.ToString("c")</a>
+                    </h4>
+                </div>
+            </div>
+        </li>
+    }
+</ul>
+
+<h3>@SharedLocalizer["Mosted_View_Products"] </h3>
+<ul class="thumbnails">
+    @foreach (var product in ViewBag.mostedViewedProducts)
+    {
+        Product pr = (Product)product;
+        Photo mainPhoto = pr.Photos.SingleOrDefault(p => p.Main && p.Status);
+        <li class="span3">
+            <div class="thumbnail">
+                <a asp-controller="product" asp-action="detail" asp-route-id="@product.Id"><img src="~/User/Images/@(mainPhoto != null ? mainPhoto.Name : "no-image.png")" /></a>
+                <div class="caption">
+                    <h5>@product.Name</h5>
+                    <p>
+                        @SharedLocalizer["Sold_By"]: <a asp-controller="vendors" asp-action="detail" asp-route-id="@product.Vendor.Id"><b> @product.Vendor.Name</b></a>
+                    </p>
+                    <h4 style="text-align:center">
+                        <a class="btn" asp-controller="Product" asp-action="detail" asp-route-id="@product.Id"> <i class="icon-zoom-in"></i></a>
+                        <a class="btn" asp-controller="cart" asp-action="buy" asp-route-id="@product.Id">@SharedLocalizer["Add_to"] <i class="icon -shopping-cart"></i></a>
+                        <a class="btn btn-primary" asp-controller="product" asp-action="detail" asp-route-id="@product.Id">@product.Price.ToString("c")</a>
+                    </h4>
+                </div>
+            </div>
+        </li>
+    }
+</ul>
+
+<h3>@SharedLocalizer["Best_Seller_Products"] </h3>
+<ul class="thumbnails">
+    @foreach (var product in ViewBag.bestSellersProducts)
+    {
+        Product pr = (Product)product;
+        Photo mainPhoto = pr.Photos.SingleOrDefault(p => p.Main && p.Status);
+        <li class="span3">
+            <div class="thumbnail">
+                <a asp-controller="product" asp-action="detail" asp-route-id="@product.Id"><img src="~/User/Images/@(mainPhoto != null ? mainPhoto.Name : "no-image.png")" /></a>
+                <div class="caption">
+                    <h5>@product.Name</h5>
+                    <p>
+                        @SharedLocalizer["Sold_By"]: <a asp-controller="vendors" asp-action="detail" asp-route-id="@product.Vendor.Id"><b> @product.Vendor.Name</b></a>
+                    </p>
+                    <h4 style="text-align:center">
+                        <a class="btn" asp-controller="Product" asp-action="detail" asp-route-id="@product.Id"> <i class="icon-zoom-in"></i></a>
+                        <a class="btn" asp-controller="cart" asp-action="buy" asp-route-id="@product.Id">@SharedLocalizer["Add_to"] <i class="icon -shopping-cart"></i></a>
+                        <a class="btn btn-primary" asp-controller="product" asp-action="detail" asp-route-id="@product.Id">@product.Price.ToString("c")</a>
+                    </h4>
+                </div>
+            </div>
+        </li>
+    }
+</ul>

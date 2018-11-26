@@ -12,6 +12,7 @@ namespace OctopusCodesMultiVendor.Models
             Messages = new HashSet<Message>();
             Orderss = new HashSet<Orders>();
             Reviews = new HashSet<Review>();
+            CustomerVendors = new HashSet<CustomerVendor>();
         }
         public int Id { get; set; }
 
@@ -35,5 +36,7 @@ namespace OctopusCodesMultiVendor.Models
         public virtual ICollection<Message> Messages { get; set; }
         public virtual ICollection<Orders> Orderss { get; set; }
         public virtual ICollection<Review> Reviews { get; set; }
+
+        public virtual ICollection<CustomerVendor> CustomerVendors { get; set; }
     }
 }

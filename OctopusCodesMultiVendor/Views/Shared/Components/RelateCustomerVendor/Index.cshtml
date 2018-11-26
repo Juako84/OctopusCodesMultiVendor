@@ -1,0 +1,99 @@
+﻿@*@Html.Raw(ViewBag.shopInfo)*@
+<div class="row">
+   
+    <!-- left column -->
+    <div class="col-md-8">
+        <!-- general form elements -->
+        <div class="box box-solid box-success">
+            <div class="box-header with-border">
+                <h3 class="box-title">@SharedLocalizer["Customer_associate_Vendor"]</h3>
+            </div>
+            <!-- /.box-header --> <!-- form start -->
+
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">@SharedLocalizer["vendors_available"]</h3>
+                        </div>
+                        <ul class="list-group list-group-sortable-connected">
+                            @if (!Enumerable.Any(ViewBag.VendorAvailable))
+                            {
+                            <li class="list-group-item list-group-item-success" draggable="true"></li>
+                            }
+                            @foreach (var vendor in ViewBag.VendorAvailable)
+                            {
+                                <li class="list-group-item list-group-item-info" id="@vendor.Id" draggable="true">@vendor.Name</li>
+
+                            }
+                        </ul>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">@SharedLocalizer["vendors_associates"]</h3>
+                        </div>
+                        <ul class="list-group list-group-sortable-connected">
+                            @if (!Enumerable.Any(ViewBag.VendorRelated))
+                            {
+                                <li class="list-group-item list-group-item-success"  draggable="true"></li>
+                            }
+                            @foreach (var vendor in ViewBag.VendorRelated)
+                            {
+                                <li class="list-group-item list-group-item-success" id="@vendor.Id" draggable="true">@vendor.Name</li>
+                            }
+
+                        </ul>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary ">@SharedLocalizer["Save"]</button>
+            </div>
+            
+        </div>
+    </div>
+</div>
+<script>
+        $(function() {
+  
+            $('.list-group-sortable-connected').sortable({
+                placeholderClass: 'list-group-item',
+                connectWith: '.connected'
+            }).bind('sortconnect', function (e, ui) {
+
+               
+
+                var data =
+                {
+                    idVendor: ui.item[0].id,
+                    idCustomer: @ViewBag.CustomerId
+                };
+           
+                
+                var formData = JSON.stringify({
+                    idVendor: ui.item[0].id,
+                    idCustomer: @ViewBag.CustomerId,
+                })
+
+                $.ajax({
+                   // url: '/adminpanel/account/Customer/RelateCustomerVendor',
+                    url: '@Url.Action("RelateCustomerVendor", "Customer")',
+                    type: "POST",
+                  //  data: formData,
+                   data: JSON.stringify(data),  
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        //alert(response.responseText);
+                    },
+                    error: function (response) {
+                        alert(response.responseText);
+                    },
+                    failure: function (response) {
+                        alert(response.responseText);
+                    }
+                });
+                
+            });
+
+           
+        });
+</script>

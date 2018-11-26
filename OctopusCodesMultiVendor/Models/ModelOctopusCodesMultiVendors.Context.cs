@@ -28,6 +28,8 @@ namespace OctopusCodesMultiVendor.Models
 
         public virtual DbSet<Users> Users { get; set; }
 
+        public virtual DbSet<CustomerVendor> CustomerVendor { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -185,6 +187,31 @@ namespace OctopusCodesMultiVendor.Models
                     .WithMany(p => p.Categories)
                     .HasForeignKey(d => d.VendorId)
                     .HasConstraintName("FK_Category_Vendor");
+            });
+
+            modelBuilder.Entity<CustomerVendor>(entity =>
+            {
+
+                entity.HasOne(d => d.Vendor)
+                   .WithMany(p => p.CustomerVendors)
+                   .HasForeignKey(d => d.VendorId)
+                   .OnDelete(DeleteBehavior.ClientSetNull)
+                   .HasConstraintName("FK_CustomerVendors_Vendor");
+
+                entity.HasOne(d => d.Customer)
+                  .WithMany(p => p.CustomerVendors)
+                  .HasForeignKey(d => d.CustomerId)
+                  .OnDelete(DeleteBehavior.ClientSetNull)
+                  .HasConstraintName("FK_CustomerVendors_Customer");
+
+                //entity.HasOne(d => d.Vendor)                    
+                //    .HasForeignKey(d => d.)
+                //    .HasConstraintName("FK_Category_Category");
+
+                //entity.HasOne(d => d.Vendor)
+                //    .WithMany(p => p.Categories)
+                //    .HasForeignKey(d => d.VendorId)
+                //    .HasConstraintName("FK_Category_Vendor");
             });
 
 
